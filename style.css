@@ -1,0 +1,21 @@
+.leaflet-control-mouseposition {
+    background-color: #d0d0d0;
+}
+.flexRow {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+    max-width: 450px;
+}
+
+#ryzomMap {
+    background-color: #000000;
+    width: 1024px;
+    height: 768px;
+    margin-right: 10px;
+}

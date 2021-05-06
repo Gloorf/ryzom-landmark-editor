@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title translate="yes" data-translate-id="pageTitle">PLACEHOLDER</title>
+        <script src="vendor/jquery.min.js"></script>
+        <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+        <script src="vendor/leaflet/leaflet.js"></script>
+        <script src="vendor/map.min.js"></script>
+        <script src="vendor/map-areas.min.js"></script>
+        <script src="glorf.js"></script>
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+    <body>
+        <div class="noDisplay">
+            <button type="button" id="deleteLandmarkTemplate" translate="yes" data-translate-id="deleteLandmarkTemplateLabel">PLACEHOLDER</button>
+        </div>
+
+        <div class="flexRow">
+            <div id="ryzomMap"></div>
+ <div class="flexColumn">
+                <div id="config">
+
+                    <form>
+                        <label for="configWidth" translate="yes" data-translate-id="configWidthLabel">PLACEHOLDER</label>
+                        <input type="text" name="configWidth" id="configWidth" value="1024">
+                        <br>
+                        <label for="configHeight" translate="yes" data-translate-id="configHeightLabel">PLACEHOLDER</label>
+                        <input type="text" name="configHeight" id="configHeight" value="850">
+                        <br>
+                        <label for="configIconSize" translate="yes" data-translate-id="configIconSizeLabel">PLACEHOLDER</label>
+                        <select name="configIconSize" id="configIconSize">
+                            <option value="16">16</option>
+                            <option value="24">24</option>
+                            <option value="32" selected="selected">32</option>
+                        </select><br>
+                        <label for="configLang" translate="yes" data-translate-id="configLangLabel">PLACEHOLDER</label>
+                        <select name="configLang" id="configLang">
+                            <option value="en">English</option>
+                            <option value="fr" selected="selected">Français</option>
+                            <option value="de">Deutsch</option>
+                            <option value="es">Español</option>
+                            <option value="ru">русский язык</option>
+                        </select><br>
+                        <label for="configTooltip" translate="yes" data-translate-id="configTooltipLabel">PLACEHOLDER</label>
+                        <input type="checkbox" id="configTooltip" name="configTooltip" checked="checked"><br>
+                        <label for="configCreateLandmarkOnClick" translate="yes" data-translate-id="configCreateLandmarkOnClickLabel">PLACEHOLDER</label>
+                        <input type="checkbox" id="configCreateLandmarkOnClick" name="configCreateLandmarkOnClick">
+                        <br>
+                        
+                            <label for="configMarkerDefaultCategory" translate="yes" data-translate-id="configMarkerDefaultCategoryLabel">PLACEHOLDER</label>
+
+<select name="configMarkerDefaultCategory" id="configMarkerDefaultCategory">
+                            <option value="0" translate="yes" selected="selected" data-translate-id="landmarkCategoryMisc" data-color="f0f">PLACEHOLDER</option>
+                            <option value="1" translate="yes" data-translate-id="landmarkCategoryTribe" data-color="bbb">PLACEHOLDER</option>
+                            <option value="2" translate="yes" data-translate-id="landmarkCategoryBandit" data-color="666">PLACEHOLDER</option>
+                            <option value="3" translate="yes" data-translate-id="landmarkCategoryCitizen" data-color="fff">PLACEHOLDER</option>
+                            <option value="4" translate="yes" data-translate-id="landmarkCategoryFauna" data-color="f60">PLACEHOLDER</option>
+                            <option value="5" translate="yes" data-translate-id="landmarkCategoryFaunaexcel" data-color="f30">PLACEHOLDER</option>
+                            <option value="6" translate="yes" data-translate-id="landmarkCategoryFaunasup" data-color="c00">PLACEHOLDER</option>
+                            <option value="7" translate="yes" data-translate-id="landmarkCategoryForage" data-color="9c3">PLACEHOLDER</option>
+                            <option value="8" translate="yes" data-translate-id="landmarkCategoryForageexcel" data-color="3c0">PLACEHOLDER</option>
+                            <option value="9" translate="yes" data-translate-id="landmarkCategoryForagesup" data-color="090">PLACEHOLDER</option>
+                            <option value="10" translate="yes" data-translate-id="landmarkCategorySap" data-color="9c3">PLACEHOLDER</option>
+                            <option value="11" translate="yes" data-translate-id="landmarkCategoryAmber" data-color="f90">PLACEHOLDER</option>
+                            <option value="12" translate="yes" data-translate-id="landmarkCategoryNode" data-color="c63">PLACEHOLDER</option>
+                            <option value="13" translate="yes" data-translate-id="landmarkCategoryFiber" data-color="ff9">PLACEHOLDER</option>
+                            <option value="14" translate="yes" data-translate-id="landmarkCategoryBark" data-color="960">PLACEHOLDER</option>
+                            <option value="15" translate="yes" data-translate-id="landmarkCategorySeed" data-color="633">PLACEHOLDER</option>
+                            <option value="16" translate="yes" data-translate-id="landmarkCategoryShell" data-color="c99">PLACEHOLDER</option>
+                            <option value="17" translate="yes" data-translate-id="landmarkCategoryResin" data-color="360">PLACEHOLDER</option>
+                            <option value="18" translate="yes" data-translate-id="landmarkCategoryWood" data-color="663">PLACEHOLDER</option>
+                            <option value="19" translate="yes" data-translate-id="landmarkCategoryOil" data-color="cc3">PLACEHOLDER</option>
+                            <option value="20" translate="yes" data-translate-id="landmarkCategoryMission" data-color="c39">PLACEHOLDER</option>
+                            <option value="21" translate="yes" data-translate-id="landmarkCategoryFood" data-color="c39">PLACEHOLDER</option>
+                            <option value="22" translate="yes" data-translate-id="landmarkCategoryConstruction" data-color="f06">PLACEHOLDER</option>
+                            <option value="23" translate="yes" data-translate-id="landmarkCategoryGoo" data-color="609">PLACEHOLDER</option>
+                            <option value="24" translate="yes" data-translate-id="landmarkCategoryInsect" data-color="369">PLACEHOLDER</option>
+                            <option value="25" translate="yes" data-translate-id="landmarkCategoryKitin" data-color="309">PLACEHOLDER</option>
+                            <option value="26" translate="yes" data-translate-id="landmarkCategoryNocive" data-color="306">PLACEHOLDER</option>
+                            <option value="27" translate="yes" data-translate-id="landmarkCategoryPreservative" data-color="303">PLACEHOLDER</option>
+                            <option value="28" translate="yes" data-translate-id="landmarkCategoryPassage" data-color="6ff">PLACEHOLDER</option>
+                            <option value="29" translate="yes" data-translate-id="landmarkCategoryTeleporter" data-color="0cc">PLACEHOLDER</option>
+                        </select>
+                        <br>
+                        <button type="button" id="hideAllCategories" translate="yes" data-translate-id="hideAllCategoriesButtonLabel">PLACEHOLDER</button>
+                        <button type="button" id="showAllCategories" translate="yes" data-translate-id="showAllCategoriesButtonLabel">PLACEHOLDER</button>
+                    </form>
+                    <br>
+                </div>
+                <div id="xmlStuff">
+
+                    <form>
+                        <label for="xmlSource" translate="yes" data-translate-id="xmlSourceLabel">PLACEHOLDER</label>
+                        <textarea id="xmlSource" name="xmlSource" rows="5" cols="60"></textarea>
+                        <br>
+
+                        <button type="button" id="xmlLoadButton" translate="yes" data-translate-id="xmlLoadButtonLabel">PLACEHOLDER</button>
+                        <button type="button" id="deleteLandmarksButton" translate="yes" data-translate-id="deleteLandmarksButtonLabel">PLACEHOLDER</button>
+                        <button type="button" id="xmlExportButton" translate="yes" data-translate-id="xmlExportButtonLabel">PLACEHOLDER</button><br>
+
+                        <label for="xmlDestination" translate="yes" data-translate-id="xmlDestinationLabel">PLACEHOLDER</label><br>
+                        <textarea id="xmlDestination" name="xmlDestination" rows="5" cols="60"></textarea>
+                    </form>
+                    <br>
+                </div>
+
+            </div> <!-- flexColumn -->
+            <div class="flexRow">
+                <div id="howto">
+                    <h3>HOWTO</h3>
+<ol>
+                        <li translate="yes" data-translate-id="howto1">PLACEHOLDER</li>
+                        <li translate="yes" data-translate-id="howto2">PLACEHOLDER</li>
+                        <li translate="yes" data-translate-id="howto3">PLACEHOLDER</li>
+                        <li translate="yes" data-translate-id="howto4">PLACEHOLDER</li>
+                        <li translate="yes" data-translate-id="howto5">PLACEHOLDER</li>
+                        <li translate="yes" data-translate-id="howto6">PLACEHOLDER</li>
+                        <li translate="yes" data-translate-id="howto7">PLACEHOLDER</li>
+                        <li translate="yes" data-translate-id="howto8">PLACEHOLDER</li>
+                        <li translate="yes" data-translate-id="howto9">PLACEHOLDER</li>
+                        <li translate="yes" data-translate-id="howto10">PLACEHOLDER</li>
+                    </ol>
+                </div>
+                <div id="tipsAndTricks">
+                    <h3>Tips and tricks</h3>
+
+<ul>
+                        <li translate="yes" data-translate-id="tipsAndTricks1">PLACEHOLDER</li>
+                        <li translate="yes" data-translate-id="tipsAndTricks2">PLACEHOLDER</li>
+                        <li translate="yes" data-translate-id="tipsAndTricks3">PLACEHOLDER</li>
+                        <li translate="yes" data-translate-id="tipsAndTricks4">PLACEHOLDER</li>
+                        <li translate="yes" data-translate-id="tipsAndTricks5">PLACEHOLDER</li>
+                        <li translate="yes" data-translate-id="tipsAndTricks6">PLACEHOLDER</li>
+                        <li translate="yes" data-translate-id="tipsAndTricks7">PLACEHOLDER</li>
+                        <li translate="yes" data-translate-id="tipsAndTricks8">PLACEHOLDER</li>
+                        <li translate="yes" data-translate-id="tipsAndTricks9">PLACEHOLDER</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+
+
+    
+
+</body></html>
