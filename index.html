@@ -19,6 +19,8 @@
         <script src="vendor/leaflet/leaflet.js"></script>
         <script src="vendor/map.min.js"></script>
         <script src="vendor/map-areas.min.js"></script>
+        <!-- js-cookie -->
+        <script src="vendor/js.cookie.min.js"></script>
         <!-- Main -->
         <script src="glorf.js"></script>
         <link rel="stylesheet" href="style.css">
@@ -39,7 +41,7 @@
                         <input type="text" name="configWidth" id="configWidth" value="1024">
                         <br>
                         <label for="configHeight"  data-i18n="configHeightLabel">PLACEHOLDER</label>
-                        <input type="text" name="configHeight" id="configHeight" value="850">
+                        <input type="text" name="configHeight" id="configHeight" value="800">
                         <br>
                         <label for="configIconSize"  data-i18n="configIconSizeLabel">PLACEHOLDER</label>
                         <select name="configIconSize" id="configIconSize">
@@ -49,21 +51,23 @@
                         </select><br>
                         <label for="configLang"  data-i18n="configLangLabel">PLACEHOLDER</label>
                         <select name="configLang" id="configLang">
-                            <option value="en">English</option>
-                            <option value="fr" selected="selected">Français</option>
+                            <option value="en" selected="selected">English</option>
+                            <option value="fr">Français</option>
+                            <!--
                             <option value="de">Deutsch</option>
                             <option value="es">Español</option>
                             <option value="ru">русский язык</option>
+                            -->
                         </select><br>
                         <label for="configTooltip"  data-i18n="configTooltipLabel">PLACEHOLDER</label>
                         <input type="checkbox" id="configTooltip" name="configTooltip" checked="checked"><br>
-                        <label for="configCreateLandmarkOnClick"  data-i18n="configCreateLandmarkOnClickLabel">PLACEHOLDER</label>
-                        <input type="checkbox" id="configCreateLandmarkOnClick" name="configCreateLandmarkOnClick">
+                        <label for="configLandmarkOnClick"  data-i18n="configLandmarkOnClickLabel">PLACEHOLDER</label>
+                        <input type="checkbox" id="configLandmarkOnClick" name="configLandmarkOnClick">
                         <br>
                         
-                            <label for="configMarkerDefaultCategory"  data-i18n="configMarkerDefaultCategoryLabel">PLACEHOLDER</label>
+                            <label for="configLandmarkDefaultCategory"  data-i18n="configLandmarkDefaultCategoryLabel">PLACEHOLDER</label>
 
-<select name="configMarkerDefaultCategory" id="configMarkerDefaultCategory">
+<select name="configLandmarkDefaultCategory" id="configLandmarkDefaultCategory">
                             <option value="0"  selected="selected" data-i18n="landmarkCategoryMisc" data-color="f0f">PLACEHOLDER</option>
                             <option value="1"  data-i18n="landmarkCategoryTribe" data-color="bbb">PLACEHOLDER</option>
                             <option value="2"  data-i18n="landmarkCategoryBandit" data-color="666">PLACEHOLDER</option>

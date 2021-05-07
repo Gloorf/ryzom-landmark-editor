@@ -15,7 +15,7 @@ class Landmark {
         this.popup = $('<div>');
         this.deleteButton = $('#deleteLandmarkTemplate').clone().removeAttr('id').click(this.onDeleteClicked.bind(this));
         this.popup.append(this.deleteButton);
-        this.categorySelect = $('#configMarkerDefaultCategory').clone().removeAttr('id');
+        this.categorySelect = $('#configLandmarkDefaultCategory').clone().removeAttr('id');
         this.categorySelect.val(this.category);
         this.categorySelect.change(this.onCategoryChange.bind(this));
         this.popup.append(this.categorySelect);
@@ -58,7 +58,7 @@ class Landmark {
 
     onTitleChange(event) {
         this.title = this.titleInput.val();
-        if($('#configTooltip').is(":checked")) {
+        if(config.tooltip) {
             this.marker.bindTooltip(this.title);
         }
     }
@@ -73,8 +73,6 @@ class Landmark {
 class LandmarkManager {
     constructor(map) {
         this.map = map;
-        this.iconSize = parseInt($('#configIconSize').val(), 10);
-        this.tooltipVisible = $('#configTooltip').is(":checked");
         this.landmarks = [];
         this.createLandmarkCategories();
         this.createGroups();
@@ -107,7 +105,7 @@ class LandmarkManager {
 
     createLandmarkCategories() {
         this.landmarkCategories = [];
-        $('#configMarkerDefaultCategory option').each(function(index, item) {
+        $('#configLandmarkDefaultCategory option').each(function(index, item) {
             var name = $(item).text();
             var color = $(item).attr('data-color');
             this.landmarkCategories.push({name: name, color: color});
@@ -136,8 +134,8 @@ class LandmarkManager {
         }
         var color = this.landmarkCategories[category].color;
         var landmark = new Landmark(category, x, y, title, this.landmarkCategories);
-        landmark.updateIcon(color, this.iconSize);
-        if(this.tooltipVisible) {
+        landmark.updateIcon(color, config.iconSize);
+        if(config.tooltip) {
             landmark.showTooltip();
         }
         // Store it in the correct place
@@ -276,18 +274,16 @@ class LandmarkManager {
     }
 
     onIconSizeChange(event) {
-        this.iconSize = parseInt($('#configIconSize').val(), 10);
         for(const landmark of this.landmarks) {
             var color = this.landmarkCategories[landmark.category].color;
-            landmark.updateIcon(color, this.iconSize);
+            landmark.updateIcon(color, config.iconSize);
         }
 
     }
 
     onTooltipVisibilityChange(event) {
-        this.tooltipVisible = $('#configTooltip').is(":checked");
         for(const landmark of this.landmarks) {
-            if(this.tooltipVisible) {
+            if(config.tooltip) {
                 landmark.showTooltip();
             }
             else {
@@ -297,10 +293,10 @@ class LandmarkManager {
     }
 
     onMapClicked(event) {
-        if(!$('#configCreateLandmarkOnClick').is(':checked')) {
+        if(!config.landmarkOnClick) {
             return;
         }
-        var category = 0;
+        var category = config.landmarkDefaultCategory;
         var title = "New Landmark";
         var x = event.latlng.lat;
         var y = event.latlng.lng;
@@ -312,7 +308,7 @@ class LandmarkManager {
         this.updateLandmarkGroup(landmark, oldCategory, newCategory);
         // Then, update the icon
         var color = this.landmarkCategories[newCategory].color;
-        landmark.updateIcon(color, this.iconSize);
+        landmark.updateIcon(color, config.iconSize);
     }
 
     onLandmarkDelete(event, landmark) {
@@ -327,9 +323,105 @@ class LandmarkManager {
     }
 }
 
-function updateMapSize() {
-    var height = parseInt($('#configHeight').val(), 10);
-    var width = parseInt($('#configWidth').val(), 10);
+class Config {
+    constructor() {
+        // Default value
+        this.width = 1024;
+        this.height = 800;
+        this.lang = 'en';
+        this.iconSize = 32;
+        this.tooltip = true;
+        this.landmarkOnClick = false;
+        this.landmarkDefaultCategory = 0;
+        $('#configWidth').change(this.onWidthChange.bind(this));
+        $('#configHeight').change(this.onHeightChange.bind(this));
+        $('#configIconSize').change(this.onIconSizeChange.bind(this));
+        $('#configLandmarkDefaultCategory').change(this.onMarkerDefaultCategoryChange.bind(this));
+        $('#configLang').change(this.onLangChange.bind(this));
+        $('#configTooltip').click(this.onTooltipChange.bind(this));
+        $('#configLandmarkOnClick').click(this.onLandmarkOnClickChange.bind(this));
+    }
+
+    restoreFromCookies() {
+        if(Cookies.get('width')) {
+            this.width = parseInt(Cookies.get('width'), 10);
+            $('#configWidth').val(this.width);
+        }
+        if(Cookies.get('height')) {
+            this.height = parseInt(Cookies.get('height'), 10);
+            $('#configHeight').val(this.height);
+        }
+        if(Cookies.get('iconSize')) {
+            this.iconSize = parseInt(Cookies.get('iconSize'), 10);
+            $('#configIconSize').val(this.iconSize);
+        }
+        if(Cookies.get('landmarkDefaultCategory')) {
+            this.landmarkDefaultCategory = parseInt(Cookies.get('landmarkDefaultCategory'), 10);
+            $('#configLandmarkDefaultCategory').val(this.landmarkDefaultCategory);
+        }   
+        if(Cookies.get('lang')) {
+            this.lang = Cookies.get('lang');
+            $('#configLang').val(this.lang);
+        }
+        if(Cookies.get('tooltip')) {
+            this.tooltip = Cookies.get('tooltip') == "true";
+            $('#configTooltip').prop('checked', this.tooltip);
+        }
+        if(Cookies.get('landmarkOnClick')) {
+            this.landmarkOnClick = Cookies.get('landmarkOnClick') == "true";
+            $('#configLandmarkOnClick').prop('checked', this.landmarkOnClick);
+        }
+    }
+
+    saveToCookies() {
+        var options = {sameSite: "Lax"};
+        for(var key in this) {
+            if(!this.hasOwnProperty(key)) {
+                continue;
+            }
+            Cookies.set(key, this[key], options);
+        }
+    }
+
+    onHeightChange() {
+        this.height = parseInt($('#configHeight').val(), 10);
+        updateMapSize(this.width, this.height);
+        this.saveToCookies();
+    }
+
+    onWidthChange() {
+        this.width = parseInt($('#configWidth').val(), 10);
+        updateMapSize(this.width, this.height);
+        this.saveToCookies();
+    }
+
+    onIconSizeChange() {
+        this.iconSize = parseInt($('#configIconSize').val(), 10);
+        this.saveToCookies();
+    }
+
+    onMarkerDefaultCategoryChange() {
+        this.landmarkDefaultCategory = parseInt($('#configLandmarkDefaultCategory').val(), 10);
+        this.saveToCookies();
+    }
+
+    onLangChange() {
+        this.lang = $('#configLang').val();
+        this.saveToCookies();
+    }
+
+    onTooltipChange() {
+        this.tooltip = $('#configTooltip').is(":checked");
+        this.saveToCookies();
+    }
+
+    onLandmarkOnClickChange() {
+        this.landmarkOnClick = $('#configLandmarkOnClick').is(":checked");
+        this.saveToCookies();
+    }
+}
+
+function updateMapSize(width, height) {
     $('#ryzomMap').css('width', width);
     $('#ryzomMap').css('height', height);
 }
@@ -338,13 +430,14 @@ function updateMapSize() {
 function getLocalMarkerIcon(name, color, size) {
     var uri = `images/${size}/${color}/${name}.png`;
     var halfSize = Math.floor(size / 2);
-        return L.icon({
+    return L.icon({
         iconUrl: uri,
         iconSize: [size, size],
         iconAnchor: [halfSize, halfSize],
         popupAnchor: [0, -halfSize]
     });
 }
+
 
 function init() {
     // Do the actual translation
@@ -353,14 +446,9 @@ function init() {
     // Patch Ryzom.icon to use local cache instead of bmsite API
     Ryzom.icon = getLocalMarkerIcon;
 
-    var lang = $('#configLang').val();
     // Map init
-    var map = Ryzom.map('ryzomMap', {rzLang: lang});
+    var map = Ryzom.map('ryzomMap', {rzLang: config.lang});
     map.addControl(new L.Control.MousePosition());
-    // Map size stuff
-    $('#configWidth').change(updateMapSize);
-    $('#configHeight').change(updateMapSize);
-    updateMapSize();
     // Manager init
     var landmarkManager = new LandmarkManager(map);
 
@@ -371,13 +459,11 @@ function init() {
    
 }
 
+var config = null;
 // Triggered when page is loaded
 $(function() {
-    // First, let's translate everything
-    var lang = $('#configLang').val();
-    if (lang != 'en' && lang != 'fr') {
-        lang = 'en';
-    }
-    $.i18n().locale = lang;
+    config = new Config();
+    config.restoreFromCookies();
+    $.i18n().locale = config.lang;
     $.i18n().load({'en': 'i18n/en.json', 'fr': 'i18n/fr.json'}).done(init);
 });
