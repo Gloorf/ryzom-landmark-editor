@@ -334,7 +334,22 @@ function updateMapSize() {
     $('#ryzomMap').css('height', height);
 }
 
+// Return icon using local cache instead of bmsite API
+function getLocalMarkerIcon(name, color, size) {
+    var uri = `images/${size}/${color}/${name}.png`;
+    var halfSize = Math.floor(size / 2);
+        return L.icon({
+        iconUrl: uri,
+        iconSize: [size, size],
+        iconAnchor: [halfSize, halfSize],
+        popupAnchor: [0, -halfSize]
+    });
+}
+
 function init() {
+
+    // Patch Ryzom.icon to use local cache instead of bmsite API
+    Ryzom.icon = getLocalMarkerIcon;
 
     var lang = $('#configLang').val();
     // Map init
