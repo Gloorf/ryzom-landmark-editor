@@ -33,7 +33,7 @@ class Landmark {
     }
 
     asXml(xml) {
-        return $('<landmark />', xml).attr('category', this.category).attr('x', this.x).attr('y', this.y).attr('title', this.title);
+        return $('<landmark />', xml).attr('type', this.category).attr('x', this.x).attr('y', this.y).attr('title', this.title);
     }
 
     hideTooltip() {
@@ -130,6 +130,10 @@ class LandmarkManager {
             console.log(`Not adding landmark ${title} at x:${x} y:${y}, another one already exists here`);
             return;
         }
+        if(category > this.landmarkCategories.length || category < 0) {
+            console.warn(`Tried to create landmark ${title} at [${x}, ${y}] with unknown category ${category}, defaulting to misc`);
+            category = 0;
+        }
         var color = this.landmarkCategories[category].color;
         var landmark = new Landmark(category, x, y, title, this.landmarkCategories);
         landmark.updateIcon(color, this.iconSize);
@@ -214,14 +218,18 @@ class LandmarkManager {
         //Now, generate correct XML
         //Note : we iterate over regionNames instead of the dict, to make sure the order is the same as a regular landmark file. I'm 99% sure that it doesn't matter for ryzom client, but better safe than sorry
         for(const name of regionNames) {
-            var region = $('<landmarks />', xml).attr('continent', name).attr('category', 'user');
+            var region = $('<landmarks />', xml).attr('continent', name).attr('type', 'user');
             for(const landmark of regions[name]) {
                 var markXml = landmark.asXml(xml);
                 $(region).append(markXml);
             }
             $('interface_config', xml).append(region);
         }
-        return new XMLSerializer().serializeToString(xml);
+        // We'll do a tiny bit of XML beautify, so it's not one long string with no newline (shitty text editors, like notepad, might struggle on copy/paste if there's a lot of landmarks)
+        var xmlStr = new XMLSerializer().serializeToString(xml);
+        // Line break after single elements should be more than enough for now
+        xmlStr = xmlStr.replaceAll("/>", "/>\n");
+        return xmlStr;
     }
 
     onHideAllCategories (event) {
