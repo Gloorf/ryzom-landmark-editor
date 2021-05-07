@@ -2,7 +2,7 @@
 
 This project requires the following lib :
 * JQuery - any 3.X version should work
-* [ryzom-map.js](https://api.bmsite.net/#maps-js) - nimetu excellent API for ryzom custom maps
+* [ryzom-map.js](https://api.bmsite.net/#maps-js) - any 1.3+ version should work
 * Leaflet - any 1.X version should work
 * JQuery-i18n - any 1.X version should work
 * JS-Cookies - any 2.X version should work
@@ -12,17 +12,16 @@ This project also requires an internet connection - `ryzom-map.js` use [Ballisti
 
 # Installation
 
-I use local JS file, so you'll need to download them and put then in `vendor/` subfolder. For convenience, a script named `download_dependencies.sh` who will do just that for you (it requires `unzip`).
+I'm using local JS files, so you'll need to download them and put then in `vendor/` subfolder. For convenience, a script named `download_dependencies.sh` will do just that for you (it requires `unzip`).
 
 # Running the editor
 
 For a test ride, you can open directly `index.html` in your favorite browser. Unfortunately, translations won't work (because requests to json files aren't allowed on `file:///` protocol) this way.
-an easy way to test it is by running python simple http server with the following command, in the project root (where `index.html` is) :
+
+Instead, you can test it by copying the files on any web server, or simply running python simple webserver :
 ```python3 -m http.server
 ```
 and then visit [localhost:8000](http://localhost:8000). 
-
-Of course, you can also just put the files on any web server, it will work perfectly fine.
 
 # License
 	Copyright (c) 2014 Guillaume Dupuy <glorf@glorf.fr>
