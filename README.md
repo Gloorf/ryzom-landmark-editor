@@ -19,7 +19,9 @@ I'm using local JS files, so you'll need to download them and put then in `vendo
 For a test ride, you can open directly `index.html` in your favorite browser. Unfortunately, translations won't work (because requests to json files aren't allowed on `file:///` protocol) this way.
 
 Instead, you can test it by copying the files on any web server, or simply running python simple webserver :
-```python3 -m http.server
+
+```
+python3 -m http.server
 ```
 and then visit [localhost:8000](http://localhost:8000). 
 
