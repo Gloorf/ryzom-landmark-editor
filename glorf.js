@@ -79,11 +79,11 @@ class LandmarkManager {
         // All triggers
         $(document).on("landmarkCategoryChange", this.onLandmarkCategoryChange.bind(this));
         $(document).on("landmarkDelete", this.onLandmarkDelete.bind(this));
-        $('#configIconSize').change(this.onIconSizeChange.bind(this));
+        $(document).on("iconSizeChange", this.onIconSizeChange.bind(this));
+        $(document).on("tooltipChange", this.onTooltipVisibilityChange.bind(this));
         $('#xmlLoadButton').click(this.onLoadXmlClicked.bind(this));
         $('#deleteLandmarksButton').click(this.onDeleteLandmarksClicked.bind(this));
         $('#xmlExportButton').click(this.onExportXmlClicked.bind(this));
-        $('#configTooltip').click(this.onTooltipVisibilityChange.bind(this));
         map.on('click', this.onMapClicked.bind(this));
         $('#hideAllCategories').click(this.onHideAllCategories.bind(this));
         $('#showAllCategories').click(this.onShowAllCategories.bind(this));
@@ -398,6 +398,7 @@ class Config {
     onIconSizeChange() {
         this.iconSize = parseInt($('#configIconSize').val(), 10);
         this.saveToCookies();
+        $(document).trigger("iconSizeChange");
     }
 
     onMarkerDefaultCategoryChange() {
@@ -413,6 +414,7 @@ class Config {
     onTooltipChange() {
         this.tooltip = $('#configTooltip').is(":checked");
         this.saveToCookies();
+        $(document).trigger("tooltipChange");
     }
 
     onLandmarkOnClickChange() {
