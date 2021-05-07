@@ -24,4 +24,12 @@ and then visit [localhost:8000](http://localhost:8000).
 
 Of course, you can also just put the files on any web server, it will work perfectly fine.
 
+# License
+	Copyright (c) 2014 Guillaume Dupuy <glorf@glorf.fr>
 
+	Ryzom Landmark Editor is free software; you can redistribute it and/or modify
+	it under the terms of the GNU Lesser General Public License as published by
+	the Free Software Foundation; either version 3 of the License, or
+	(at your option) any later version.
+
+[LGPLv3](http://opensource.org/licenses/LGPL-3.0)
