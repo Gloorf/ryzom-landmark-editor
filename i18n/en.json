@@ -63,5 +63,5 @@
     "tipsAndTricks6": "First layer control is regular map / satellite + labels",
     "tipsAndTricks7": "Second one is landmark type (misc, boss, mission ...)",
     "tipsAndTricks8": "XML output is ugly, Ryzom client doesn't care tho",
-    "tipsAndTricks9": "If you really care, you can use a XML beautifier, for example <a href=\"https://jsonformatter.org/xml-formatter\">this one</a>, <a href=\"https://beautifytools.com/xml-beautifier.php\">that one</a> or <a href=\"https://codebeautify.org/xmlviewer\">a third one</a> (or any other you find)"
+    "tipsAndTricks9": "If you really care, you can use a XML beautifier"
 }

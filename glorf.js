@@ -347,6 +347,8 @@ function getLocalMarkerIcon(name, color, size) {
 }
 
 function init() {
+    // Do the actual translation
+    $('html').i18n();
 
     // Patch Ryzom.icon to use local cache instead of bmsite API
     Ryzom.icon = getLocalMarkerIcon;
@@ -376,20 +378,6 @@ $(function() {
     if (lang != 'en' && lang != 'fr') {
         lang = 'en';
     }
-    var translations = null;
-    $.getJSON(`translations/${lang}.json`, function(data) {
-        translations = data;
-        $('[data-translate-id]').each(function() {
-            var trId = $(this).attr('data-translate-id');
-            var translated = translations[trId];
-            if(!translated) {
-                console.warn(`No translation found for ${trId}, should not happen`);
-            }
-            else {
-                $(this).text(translated);
-            }
-        });
-        // translation done
-        init();
-    });
+    $.i18n().locale = lang;
+    $.i18n().load({'en': 'i18n/en.json', 'fr': 'i18n/fr.json'}).done(init);
 });
