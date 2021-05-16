@@ -1,3 +1,6 @@
+# Demo
+
+An hosted version of this editor is available [here](https://gloorf.github.io/ryzom_landmark_editor/).
 # Dependencies
 
 This project requires the following lib :
