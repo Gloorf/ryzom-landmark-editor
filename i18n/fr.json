@@ -63,5 +63,8 @@
     "tipsAndTricks6": "Le premier filtre permet de choisir l'affichage de la carte classique ou satellite + les étiquettes",
     "tipsAndTricks7": "Le second filtre les catégories de repère (divers, boss, mission ...)",
     "tipsAndTricks8": "La sortie XML est moche, mais le client Ryzom s'en moque.",
-    "tipsAndTricks9": "Si vous y tenez vraiment, vous pouvez utiliser un embellisseur XML (XML beautifier)."
+    "tipsAndTricks9": "Si vous y tenez vraiment, vous pouvez utiliser un embellisseur XML (XML beautifier).",
+    "duplicateXmlPopup": "Vous êtes en train de rajouter le même XML que le dernier, probablement car vous avez cliqué plusieurs fois sur le bouton. Êtes vous sûrs que c'est ce que vous souhaitez faire ?",
+    "deleteAllPopup": "Êtes-vous sûrs de vouloir supprimer TOUS les marqueurs ?"
+
 }
