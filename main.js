@@ -252,7 +252,7 @@ class LandmarkManager {
         var xml = $('#xmlSource').val();
         // To prevent accidental multiclick
         if(this.oldXml && xml == this.oldXml) {
-            if(!confirm("You are adding the same XML as last one, probably because you clicked multiples times on the add button. Are you sure this is what you want to do ?")) {
+            if(!confirm($.i18n('duplicateXmlPopup'))) {
                 return;
             }
         }
@@ -262,7 +262,7 @@ class LandmarkManager {
 
     // Remove everything !
     onDeleteLandmarksClicked(event) {
-        if(!confirm("Are you sure you want to delete all landmarks ?")) {
+        if(!confirm($.i18n('deleteAllPopup'))) {
             return;
         }
         this.cleanState();
@@ -467,5 +467,5 @@ $(function() {
     config = new Config();
     config.restoreFromCookies();
     $.i18n().locale = config.lang;
-    $.i18n().load({'en': 'i18n/en.json', 'fr': 'i18n/fr.json'}).done(init);
+    $.i18n().load({'en': 'i18n/en.json', 'fr': 'i18n/fr.json', 'ru': 'i18n/ru.json', 'de': 'i18n/de.json', 'es': 'i18n/es.json'}).done(init);
 });
